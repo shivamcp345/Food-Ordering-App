@@ -1,5 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import foodData from "./data/foodData";
+import Swal from "sweetalert2"
+const popup = () => {
+   Swal.fire({
+      title: "Success!",
+      text: "Item added to cart successfully.",
+      icon: "success",
+      confirmButtonText: "OK",
+    });
+}
 const Card = ({search,category}) => {
     const filteredFood = foodData.filter((item) => {
      const matchSearch = 
@@ -20,7 +29,7 @@ const Card = ({search,category}) => {
             <p>{item.type}</p>
           </div>
 
-          <button>Add to Cart</button>
+          <button onClick={() => setOpen(true)}>Add to Cart</button>
         </div>
       ))}
     </div>
