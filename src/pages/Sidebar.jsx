@@ -1,11 +1,21 @@
 import React from "react";
 import { IoClose } from "react-icons/io5";
 import { FaTrash } from "react-icons/fa";
+import Swal from "sweetalert2"
 
 const getPrice = (price) => {
   return parseInt(String(price).replace(/[^0-9]/g,""),10)
 };
 const Sidebar = ({ cart, setCart, setShowCart }) => {
+   const popup = () => {
+     Swal.fire({
+        title: "Success!",
+        text: "Order placed successfully",
+        icon: "success",
+        confirmButtonText: "OK",
+      });
+   };
+
   const deliveryFee = 40;
 
   const subtotal = cart.reduce(
@@ -51,10 +61,10 @@ const Sidebar = ({ cart, setCart, setShowCart }) => {
         onClick={() => setShowCart(false)}
       ></div>
 
-      <div className="fixed top-0 right-0 h-screen w-[450px] bg-white z-50 shadow-2xl flex flex-col rounded-l-3xl">
+      <div className="fixed top-0 right-0 h-screen w-[70vw] bg-white z-50 shadow-2xl flex flex-col rounded-l-xl">
 
         <div className="flex justify-between items-center p-6 border-b">
-          <h1 className="text-3xl font-bold text-gray-800">My Cart</h1>
+          <h1 className="text-xl font-bold text-gray-800">My Cart</h1>
 
           <button onClick={() => setShowCart(false)}>
             <IoClose size={30} />
@@ -135,7 +145,6 @@ const Sidebar = ({ cart, setCart, setShowCart }) => {
 
         </div>
 
-        {/* Bill */}
         <div className="border-t p-6">
 
           <div className="flex justify-between mb-3">
@@ -158,7 +167,7 @@ const Sidebar = ({ cart, setCart, setShowCart }) => {
             <span>₹{grandTotal}</span>
           </div>
 
-          <button className="w-full bg-green-600 text-white py-4 rounded-xl mt-6 text-lg font-semibold hover:bg-green-700 transition">
+          <button className="w-full bg-green-600 text-white py-4 rounded-xl mt-6 text-lg font-semibold hover:bg-green-700 transition"onClick={popup}>
             Place Order
           </button>
 
