@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import foodData from "./data/foodData";
 import Swal from "sweetalert2"
-const popup = () => {
+
+const Card = ({search,category,cart,setCart}) => {
+  const popup = () => {
    Swal.fire({
       title: "Success!",
       text: "Item added to cart successfully.",
@@ -9,7 +11,23 @@ const popup = () => {
       confirmButtonText: "OK",
     });
 }
-const Card = ({search,category}) => {
+const addToCart = (item) => {
+  const exist = cart.find((x) => x.id === item.id);
+  if(exist){
+    setCart(
+      cart.map((x) =>(
+        x.id === item.id
+        ? {...x,quantity: x.quantity + 1}
+        : x
+      ))
+    )
+  } else{
+    setCart([...cart, {...item, quantity: 1}])
+  }
+  popup();
+}
+
+   
     const filteredFood = foodData.filter((item) => {
      const matchSearch = 
       item.name.toLowerCase().includes(search.toLowerCase().trim());
@@ -29,11 +47,10 @@ const Card = ({search,category}) => {
             <p>{item.type}</p>
           </div>
 
-          <button onClick={() => setOpen(true)}>Add to Cart</button>
+          <button onClick={() => addToCart(item)}>Add to Cart</button>
         </div>
       ))}
     </div>
   );
 };
-
 export default Card;

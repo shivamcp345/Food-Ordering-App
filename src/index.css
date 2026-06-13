@@ -267,3 +267,23 @@ body{
 .add-btn:active {
   transform: scale(0.96);
 }
+.navbar-cart{
+    position: relative;
+    cursor: pointer;
+}
+
+.cart-count{
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 20px;
+    height: 20px;
+    background: red;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    font-weight: bold;
+}
